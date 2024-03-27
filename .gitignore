@@ -1,5 +1,7 @@
 # VSCode settings
 .vscode
+.vs
+.history
 
 # Binary target
 hello
@@ -7,3 +9,5 @@ hello
 # CTags
 tags
 
+# Debug
+Debug
