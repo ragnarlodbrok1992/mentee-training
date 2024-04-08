@@ -14,8 +14,9 @@ int
 	CurrentHeight = 800,
 	WindowHandle = 0;
 
-/*
-* Vertices corner coordinates
+/* 
+* Geometric figures with vertices corner coordinates
+* 
 GLfloat vertices[] = { // equilateral triangle
 	-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
 	0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
@@ -26,17 +27,9 @@ GLfloat vertices[] = { // right triangle
 	0.3f, -0.3f, 0.0f, // Lower right
 	-0.3f, 0.3f, 0.0f // Upper left
 };
-GLfloat vertices[] = { // square
-	-0.8f,  0.8f, 0.0f,
-	0.8f,  0.8f, 0.0f,
-	-0.8f, -0.8f, 0.0f,
-
-	-0.8f, -0.8f, 0.0f,
-	0.8f,  0.8f, 0.0f,
-	0.8f, -0.8f, 0.0f,
-};
 */
-
+/* One big triangle and small one inside using vertices & indices corner coordinates
+* 
 float vertices[] = {
 	- 0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
 	0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner
@@ -45,15 +38,27 @@ float vertices[] = {
 	0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // Inner right
 	0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f // Inner down
 };
-
-/*
-* Indices for vertices order
-*/
 GLuint indices[] =
 {
 	0, 3, 5, // Lower left triangle
 	3, 2, 4, // Lower right triangle
 	5, 4, 1 // Upper triangle
+};
+*/
+
+/*
+* Square with vertices & indices
+*/
+GLfloat vertices[] = {
+	-0.8f, -0.8f, 0.0f, // Lower left
+	0.8f,  -0.8f, 0.0f, // Lower right
+	-0.8f,  0.8f, 0.0f, // Upper left
+	0.8f,  0.8f, 0.0f, // Upper right
+};
+GLuint indices[] =
+{
+	0, 1, 2, // Lower left triangle
+	2, 1, 3, // Upper right triangle
 };
 
 int main() {
@@ -128,7 +133,7 @@ int main() {
 		// Draw a square using the GL_TRIANGLES primitive
 		// glDrawArrays(GL_TRIANGLES, 0, 6);
 		// Draw primitives, number of indices, datatype of indices, index of indices
-		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
