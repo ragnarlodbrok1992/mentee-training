@@ -23,7 +23,7 @@ class VAO
 		/*
 		* @param VBO
 		* @param layout - the location of the layout
-		*  defined in default.vert 0 for coordinates/position and 1 for color
+		*  defined in default.vert 0 for coordinates (position) and 1 for color
 		* @param numComponents - the number of components per layout
 		*  defined in Main.cpp three floats per position and three for color
 		* @param type - type of the component

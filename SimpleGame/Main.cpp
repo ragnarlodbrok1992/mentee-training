@@ -131,12 +131,14 @@ int main() {
 
 		shaderProgram.Activate();
 
+		double timeValue = glfwGetTime();
+
 		// Specify the value of a uniform variable for the current program object
 		// The function requires a specific postfix to prevent overloading 
 		// in that case 1 float
 		// @param location
 		// @param GLfloat
-		glUniform1f(uniID, 0.5f);
+		glUniform1f(uniID, (sin(timeValue) / 2.0f) + 0.5f);
 
 		VAO1.Bind();
 
