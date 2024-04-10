@@ -4,7 +4,7 @@
 
 #include<glad/glad.h>
 /*
-* Vertex Buffer Object 
+* Vertex Buffer Object
 * store a large number of vertices in the GPU's memory,
 * send large batches of data all at once to the graphics card,
 * keep it there if there's enough memory left,
