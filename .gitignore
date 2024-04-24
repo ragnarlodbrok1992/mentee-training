@@ -4,7 +4,8 @@
 .history
 
 # Binary target
-hello
+hello.exe
+main.exe
 
 # CTags
 tags
@@ -14,4 +15,9 @@ Debug
 
 # Default binary
 a.out
+
+# Includes and libs
+**/lib/*
+!**/lib/.empty
+**/SDL2/*
 
