@@ -3,6 +3,9 @@
 
 const int WIDTH = 800, HEIGHT = 600;
 
+// TODO: exercise 1) dvd screensaver, bouncing rect & change colors
+// TODO: exercise 2) dvd screensaver, add texture to rect
+
 int main(int arg, char *argv[])
 {
     SDL_Init(SDL_INIT_VIDEO);
@@ -32,6 +35,15 @@ int main(int arg, char *argv[])
 
     bool running = true;
 
+    // x, y top left corner
+    SDL_Rect rect =
+        {
+            100,
+            100,
+            100,
+            100,
+        };
+
     while (running) // One cycle frame
     {
         // Check the close event and keypress
@@ -41,21 +53,26 @@ int main(int arg, char *argv[])
             {
                 running = false;
             }
-            if (SDL_KEYUP == event.type)
+            if (SDL_KEYDOWN == event.type)
             {
+                // TODO: Remember to optimize arrow motion keypresses
                 switch (event.key.keysym.sym)
                 {
                 case SDLK_DOWN:
                     std::cout << "Go down" << std::endl;
+                    rect.y += 10;
                     break;
                 case SDLK_UP:
                     std::cout << "Go up" << std::endl;
+                    rect.y -= 10;
                     break;
                 case SDLK_RIGHT:
                     std::cout << "Go right" << std::endl;
+                    rect.x += 10;
                     break;
                 case SDLK_LEFT:
                     std::cout << "Go left" << std::endl;
+                    rect.x -= 10;
                     break;
                 case SDLK_ESCAPE:
                     running = false;
@@ -72,7 +89,7 @@ int main(int arg, char *argv[])
         SDL_RenderClear(gRenderer);
 
         // Draw red rect
-        SDL_Rect fillRect = {WIDTH / 4, HEIGHT / 4, WIDTH / 2, HEIGHT / 2};
+        SDL_Rect fillRect = {rect};
         SDL_SetRenderDrawColor(gRenderer, 0xFF, 0x00, 0x00, 0xFF);
         SDL_RenderFillRect(gRenderer, &fillRect);
 
