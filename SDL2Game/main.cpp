@@ -1,18 +1,11 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <random>
+#include "CRnd.h"
 
 const int SCREEN_WIDTH = 800, SCREEN_HEIGHT = 600;
 
 // TODO: exercise 1) dvd screensaver, bouncing rect & change colors
 // TODO: exercise 2) dvd screensaver, add texture to rect
-int randomize(int maxRange)
-{
-    std::random_device rd;                              // obtain a random number from hardware
-    std::mt19937 gen(rd());                             // seed the generator
-    std::uniform_int_distribution<> distr(0, maxRange); // define the range
-    return distr(gen);                                  // generate numbers
-};
 void coordinates(SDL_Rect shape)
 {
     printf("X:%d Y:%d\n", shape.x, shape.y);
@@ -45,23 +38,25 @@ int main(int arg, char *argv[])
 
     bool running = true;
 
-    int rectWidth = 50;
-    int rectHeight = 50;
+    const int rectWidth = 50;
+    const int rectHeight = 50;
+
+    CRnd posX, poxY, color;
 
     // Set rect to random initial position
     SDL_Rect srcRect =
         {
-            randomize(SCREEN_WIDTH - rectWidth),   // x from left to right
-            randomize(SCREEN_HEIGHT - rectHeight), // y from top to bottom
-            rectWidth,                             // width
-            rectHeight,                            // height
+            posX.getRandom(0, SCREEN_WIDTH - rectWidth),   // x from left to right
+            poxY.getRandom(0, SCREEN_HEIGHT - rectHeight), // y from top to bottom
+            rectWidth,                                     // width
+            rectHeight,                                    // height
         };
 
     int moveX = 1;
-    int moveY = 1;
-    int fillRed = 0;
-    int fillGreen = 0;
-    int fillBlue = 255;
+    int moveY = 3;
+    Uint8 fillRed = 0;
+    Uint8 fillGreen = 0;
+    Uint8 fillBlue = 255;
 
     while (running) // One cycle frame
     {
@@ -96,19 +91,19 @@ int main(int arg, char *argv[])
 
         // TODO: Learn more about Motion (integration methods, interpolation, etc.)
 
-        if (srcRect.x == 0 || srcRect.x == SCREEN_WIDTH - rectWidth)
+        if (srcRect.x <= 0 + abs(moveX) || srcRect.x >= SCREEN_WIDTH - rectWidth - abs(moveX))
         {
             moveX = -moveX;
-            fillRed = randomize(255);
-            fillGreen = randomize(255);
-            fillBlue = randomize(255);
+            fillRed = color.getRandom();
+            fillGreen = color.getRandom();
+            fillBlue = color.getRandom();
         };
-        if (srcRect.y == 0 || srcRect.y == SCREEN_HEIGHT - rectHeight)
+        if (srcRect.y <= 0 + abs(moveY) || srcRect.y >= SCREEN_HEIGHT - rectHeight - abs(moveY))
         {
             moveY = -moveY;
-            fillRed = randomize(255);
-            fillGreen = randomize(255);
-            fillBlue = randomize(255);
+            fillRed = color.getRandom();
+            fillGreen = color.getRandom();
+            fillBlue = color.getRandom();
         };
 
         srcRect.x += moveX;
@@ -116,7 +111,7 @@ int main(int arg, char *argv[])
 
         coordinates(srcRect);
 
-        SDL_Delay(50);
+        SDL_Delay(5);
 
         // Draw to the screen
         SDL_RenderPresent(gRenderer);
