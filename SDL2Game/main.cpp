@@ -1,11 +1,10 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "CRnd.h"
+#include "CTexture.h"
 
 const int SCREEN_WIDTH = 800, SCREEN_HEIGHT = 600;
 
-// TODO: exercise 1) dvd screensaver, bouncing rect & change colors
-// TODO: exercise 2) dvd screensaver, add texture to rect
 void coordinates(SDL_Rect shape)
 {
     printf("X:%d Y:%d\n", shape.x, shape.y);
@@ -42,6 +41,7 @@ int main(int arg, char *argv[])
     const int rectHeight = 50;
 
     CRnd posX, poxY, color;
+    CTexture DvDLogo(gRenderer, "./src/images/DVD-Logo-w.bmp");
 
     // Set rect to random initial position
     SDL_Rect srcRect =
@@ -52,8 +52,8 @@ int main(int arg, char *argv[])
             rectHeight,                                    // height
         };
 
-    int moveX = 1;
-    int moveY = 3;
+    int moveX = 2;
+    int moveY = 2;
     Uint8 fillRed = 0;
     Uint8 fillGreen = 0;
     Uint8 fillBlue = 255;
@@ -81,13 +81,13 @@ int main(int arg, char *argv[])
             }
         }
 
-        // Clear screen to black
-        SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
+        // Clear screen to one color
+        SDL_SetRenderDrawColor(gRenderer, 0xC6, 0xD2, 0xD9, 0x00);
         SDL_RenderClear(gRenderer);
 
-        // Draw red rect
-        SDL_SetRenderDrawColor(gRenderer, fillRed, fillGreen, fillBlue, 0xFF);
-        SDL_RenderFillRect(gRenderer, &srcRect);
+        // Draw DVD logo
+        DvDLogo.Render(gRenderer, &srcRect);
+        DvDLogo.SetColor(fillRed, fillGreen, fillBlue);
 
         // TODO: Learn more about Motion (integration methods, interpolation, etc.)
 
@@ -112,7 +112,6 @@ int main(int arg, char *argv[])
         coordinates(srcRect);
 
         SDL_Delay(5);
-
         // Draw to the screen
         SDL_RenderPresent(gRenderer);
     }
