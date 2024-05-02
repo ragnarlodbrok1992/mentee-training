@@ -3,6 +3,13 @@
 #include "CRnd.h"
 #include "CTexture.h"
 
+/**
+ * @brief TODO:
+ * - [] Generate circle shapes that will use the same movement as DVD Logo.
+ * - [] Add a counter that will display numbers at the top of the screen.
+ * - [] Handle the collision and update the counter.
+ */
+
 const int SCREEN_WIDTH = 800, SCREEN_HEIGHT = 600;
 
 void coordinates(SDL_Rect shape)
