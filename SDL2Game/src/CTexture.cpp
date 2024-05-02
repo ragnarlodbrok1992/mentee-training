@@ -19,5 +19,5 @@ void CTexture::Render(SDL_Renderer *&renderer, SDL_Rect *rectangle)
 
 void CTexture::SetColor(Uint8 r, Uint8 g, Uint8 b)
 {
-    int color = SDL_SetTextureColorMod(texture, r, g, b);
+    SDL_SetTextureColorMod(texture, r, g, b);
 }
