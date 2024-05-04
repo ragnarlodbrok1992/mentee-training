@@ -22,7 +22,6 @@ private:
     int moveX = 2;
     int moveY = 2;
     SDL_Rect *shape;
-    void Init();
 };
 
 #endif

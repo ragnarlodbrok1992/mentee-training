@@ -12,7 +12,7 @@ private:
     static mt19937 gen;
 
 public:
-    int getRandom(int minRange = 0, int maxRange = 255);
+    int GetRandom(int minRange = 0, int maxRange = 255);
 };
 
 #endif
