@@ -21,3 +21,9 @@ a.out
 !**/lib/.empty
 **/SDL2/*
 
+# Linux binary
+**/main
+
+# CTags stuff
+**/tags.*
+
