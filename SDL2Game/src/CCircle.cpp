@@ -2,23 +2,29 @@
 
 CCircle::CCircle(SDL_Renderer *&renderer, Circle obj, Color col)
 {
-    SDL_SetRenderDrawColor(renderer, col.r, col.g, col.b, SDL_ALPHA_OPAQUE);
-    DrawFilledCircle(renderer, obj.centerX, obj.centerY, obj.radius);
+    this->circle = obj;
+    this->color = col;
 }
 
-void CCircle::DrawCircleLines(SDL_Renderer *&renderer, int centerX, int centerY, int x, int y)
+void CCircle::Draw(SDL_Renderer *&renderer)
 {
-    SDL_RenderDrawLine(renderer, centerX + x, centerY + y, centerX - x, centerY + y);
-    SDL_RenderDrawLine(renderer, centerX + x, centerY - y, centerX - x, centerY - y);
-    SDL_RenderDrawLine(renderer, centerX + y, centerY + x, centerX - y, centerY + x);
-    SDL_RenderDrawLine(renderer, centerX + y, centerY - x, centerX - y, centerY - x);
+    SDL_SetRenderDrawColor(renderer, this->color.r, this->color.g, this->color.b, SDL_ALPHA_OPAQUE);
+    DrawFilledCircle(renderer, this->circle.radius);
 }
 
-void CCircle::DrawFilledCircle(SDL_Renderer *&renderer, int centerX, int centerY, int radius)
+void CCircle::DrawCircleLines(SDL_Renderer *&renderer, int x, int y)
+{
+    SDL_RenderDrawLine(renderer, this->circle.centerX + x, this->circle.centerY + y, this->circle.centerX - x, this->circle.centerY + y);
+    SDL_RenderDrawLine(renderer, this->circle.centerX + x, this->circle.centerY - y, this->circle.centerX - x, this->circle.centerY - y);
+    SDL_RenderDrawLine(renderer, this->circle.centerX + y, this->circle.centerY + x, this->circle.centerX - y, this->circle.centerY + x);
+    SDL_RenderDrawLine(renderer, this->circle.centerX + y, this->circle.centerY - x, this->circle.centerX - y, this->circle.centerY - x);
+}
+
+void CCircle::DrawFilledCircle(SDL_Renderer *&renderer, int radius)
 {
     int x = 0, y = radius;
     int d = 3 - 2 * radius;
-    DrawCircleLines(renderer, centerX, centerY, x, y);
+    DrawCircleLines(renderer, x, y);
     while (y >= x)
     {
         x++;
@@ -29,6 +35,6 @@ void CCircle::DrawFilledCircle(SDL_Renderer *&renderer, int centerX, int centerY
         }
         else
             d = d + 4 * x + 6;
-        DrawCircleLines(renderer, centerX, centerY, x, y);
+        DrawCircleLines(renderer, x, y);
     }
 }

@@ -1,8 +1,8 @@
 CXX = g++
 
-LIBS = -lmingw32 -lSDL2main -lSDL2
+LIBS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf
 
-CXXFLAGS = -Wall -g
+CXXFLAGS = -Wall -Wpedantic -g 
 
 all:
 	$(CXX) $(CXXFLAGS) ./src/*.cpp -I src/include -L src/lib -o main main.cpp $(LIBS)

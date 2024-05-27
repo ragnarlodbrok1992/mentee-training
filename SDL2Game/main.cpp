@@ -6,6 +6,7 @@
 #include "CCircle.h"
 #include "CAnimate.h"
 #include "Constant.h"
+#include "CText.h"
 
 using namespace Constant;
 
@@ -27,6 +28,7 @@ int main(int arg, char *argv[])
     SDL_Renderer *gRenderer = app.GetRenderer();
     CRnd posX, posY;
     CTexture DvDLogo(gRenderer, "./src/images/DVD-Logo-w.bmp");
+    TTF_Font *font = app.GetFont();
 
     const int rectWidth = 50;
     const int rectHeight = 50;
@@ -39,11 +41,26 @@ int main(int arg, char *argv[])
             rectHeight,                                    // height
         };
 
+    SDL_Rect textRect =
+        {
+            posX.GetRandom(0, SCREEN_WIDTH - 50),  // x from left to right
+            posY.GetRandom(0, SCREEN_HEIGHT - 20), // y from top to bottom
+            50,                                    // width
+            20,                                    // height
+        };
+
     CAnimate rectangle(&srcRect, 2, 2);
 
     Uint8 fillRed = 0;
     Uint8 fillGreen = 0;
     Uint8 fillBlue = 255;
+
+    Circle point1 = {100, 150, 25};
+    Circle point2 = {400, 450, 25};
+    CCircle Point1(gRenderer, point1, {255, 0, 0});
+    CCircle Point2(gRenderer, point2, {0, 0, 255});
+
+    CText Text(gRenderer, font, std::string("text"));
 
     while (app.GetRunning()) // One cycle frame
     {
@@ -79,8 +96,10 @@ int main(int arg, char *argv[])
         rectangle.Start();
         // coordinates(srcRect);
 
-        CCircle Point1(gRenderer, {100, 150, 25}, {255, 0, 0});
-        CCircle Point2(gRenderer, {400, 450, 25}, {0, 0, 255});
+        Point1.Draw(gRenderer);
+        Point2.Draw(gRenderer);
+
+        Text.Render(gRenderer, &textRect);
 
         SDL_Delay(5);
         // Draw to the screen

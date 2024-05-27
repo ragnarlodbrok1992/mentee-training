@@ -7,7 +7,7 @@ CAnimate::CAnimate(SDL_Rect *srcRect, int moveX, int moveY)
 {
     this->moveX = moveX;
     this->moveY = moveY;
-    shape = srcRect;
+    this->shape = srcRect;
 }
 
 CAnimate::~CAnimate()
@@ -31,6 +31,6 @@ void CAnimate::Start()
         // fillBlue = color.getRandom();
     };
 
-    shape->x += this->moveX;
-    shape->y += this->moveY;
+    this->shape->x += this->moveX;
+    this->shape->y += this->moveY;
 }
