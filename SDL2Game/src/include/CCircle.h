@@ -23,10 +23,13 @@ class CCircle
 public:
     // Constructor
     CCircle(SDL_Renderer *&renderer, Circle obj, Color col);
+    void Draw(SDL_Renderer *&renderer);
 
 private:
-    void DrawFilledCircle(SDL_Renderer *&renderer, int centerX, int centerY, int radius);
-    void DrawCircleLines(SDL_Renderer *&renderer, int centerX, int centerY, int x, int y);
+    Circle circle;
+    Color color;
+    void DrawFilledCircle(SDL_Renderer *&renderer, int radius);
+    void DrawCircleLines(SDL_Renderer *&renderer, int x, int y);
 };
 
 #endif
