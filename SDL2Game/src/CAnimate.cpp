@@ -2,10 +2,9 @@
 #include "Constant.h"
 
 using namespace Constant;
-
-/** TODO:
- * - allow to anime different object not only srcRect
- * - move color logic to a different class
+/**
+ // TODO: allow to anime different object not only srcRect
+ // TODO: move color logic to a different class
  *
  * @brief Construct a new CAnimate::CAnimate object
  * @param srcRect - object that will be moved

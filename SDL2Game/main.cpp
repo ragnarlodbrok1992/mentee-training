@@ -11,12 +11,13 @@
 using namespace Constant;
 
 /**
- * @brief TODO:
+ * // TODO:
  * - [] Generate circle shapes that will use the same movement as DVD Logo.
  * - [] Add a counter that will display numbers at the top of the screen.
  * - [] Handle the collision and update the counter.
  */
 
+// TODO: Move fn from main file to for example helpers
 void coordinates(SDL_Rect shape)
 {
     printf("X:%d Y:%d\n", shape.x, shape.y);
@@ -54,17 +55,16 @@ int main(int arg, char *argv[])
     Uint8 fillRed = 0;
     Uint8 fillGreen = 0;
     Uint8 fillBlue = 255;
+    int points = 0;
 
     Circle point1 = {100, 150, 25};
     Circle point2 = {400, 450, 25};
     CCircle Point1(gRenderer, point1, {255, 0, 0});
     CCircle Point2(gRenderer, point2, {0, 0, 255});
-
-    CText Text(gRenderer, font, std::string("Hits: 0"));
+    CText Text(gRenderer, font, std::string("Hits: " + std::to_string(points)));
 
     while (app.GetRunning()) // One cycle frame
     {
-
         SDL_Event event;
         // Check the close event and keypress
         if (SDL_PollEvent(&event))
@@ -78,6 +78,9 @@ int main(int arg, char *argv[])
                 // TODO: Remember to optimize arrow motion keypresses
                 switch (event.key.keysym.sym)
                 {
+                case SDLK_SPACE:
+                    Text.Update(gRenderer, &textRect, std::string("Hits: " + std::to_string(points += 1)));
+                    break;
                 case SDLK_ESCAPE:
                     app.SetRunning(false);
                     break;
@@ -94,14 +97,13 @@ int main(int arg, char *argv[])
         DvDLogo.SetColor(fillRed, fillGreen, fillBlue);
 
         rectangle.Start();
-        // coordinates(srcRect);
-
         Point1.Draw(gRenderer);
         Point2.Draw(gRenderer);
 
         Text.Render(gRenderer, &textRect);
 
         SDL_Delay(5);
+
         // Draw to the screen
         SDL_RenderPresent(gRenderer);
     }
