@@ -3,6 +3,16 @@
 
 using namespace Constant;
 
+/** TODO:
+ * - allow to anime different object not only srcRect
+ * - move color logic to a different class
+ *
+ * @brief Construct a new CAnimate::CAnimate object
+ * @param srcRect - object that will be moved
+ * @param moveX - the amount of pixels move in X axis
+ * @param moveY - the amount of pixels move in Y axis
+ */
+
 CAnimate::CAnimate(SDL_Rect *srcRect, int moveX, int moveY)
 {
     this->moveX = moveX;

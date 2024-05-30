@@ -13,23 +13,23 @@ CGameApp::CGameApp(const char *title)
     }
 
     // Initialize the video subsystem
-    window = SDL_CreateWindow(
+    this->window = SDL_CreateWindow(
         title,
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         SCREEN_WIDTH, SCREEN_HEIGHT,
         SDL_WINDOW_OPENGL);
 
-    if (NULL == window)
+    if (NULL == this->window)
     {
         std::cout << "Cloud not create window: " << SDL_GetError() << std::endl;
     }
 
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    if (NULL == renderer)
+    if (NULL == this->renderer)
     {
-        std::cout << "Cloud not create renderer: " << SDL_GetError() << std::endl;
+        std::cout << "Cloud not create this->renderer: " << SDL_GetError() << std::endl;
     }
 
     this->font = TTF_OpenFont("./src/font/consolas.ttf", 24);
@@ -43,14 +43,14 @@ CGameApp::CGameApp(const char *title)
 CGameApp::~CGameApp()
 {
     TTF_CloseFont(this->font);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(this->renderer);
+    SDL_DestroyWindow(this->window);
     SDL_Quit();
 }
 
 SDL_Renderer *CGameApp::GetRenderer() const
 {
-    return renderer;
+    return this->renderer;
 }
 
 bool CGameApp::GetRunning()

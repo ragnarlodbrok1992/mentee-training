@@ -43,10 +43,10 @@ int main(int arg, char *argv[])
 
     SDL_Rect textRect =
         {
-            posX.GetRandom(0, SCREEN_WIDTH - 50),  // x from left to right
-            posY.GetRandom(0, SCREEN_HEIGHT - 20), // y from top to bottom
-            50,                                    // width
-            20,                                    // height
+            10,  // x from left to right
+            10,  // y from top to bottom
+            100, // width
+            20,  // height
         };
 
     CAnimate rectangle(&srcRect, 2, 2);
@@ -60,7 +60,7 @@ int main(int arg, char *argv[])
     CCircle Point1(gRenderer, point1, {255, 0, 0});
     CCircle Point2(gRenderer, point2, {0, 0, 255});
 
-    CText Text(gRenderer, font, std::string("text"));
+    CText Text(gRenderer, font, std::string("Hits: 0"));
 
     while (app.GetRunning()) // One cycle frame
     {
